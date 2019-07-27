@@ -180,6 +180,15 @@ export const ModuleConfig = {
    * Vuex Default Getters
    */
   getters: {
+    datas: state => state.datas,
+    baseFields: state => state.baseFields,
+    listSearchAttributes: state => state.listSearchAttributes,
+    relateAttributes: state => state.relateAttributes,
+    globalDatas: state => state.globalDatas,
+    infos: state => state.infos,
+    info: state => state.info,
+    pages: state => state.pages,
+    //: state => state.,
     loading: state => state.loading,
     errors: state => state.errors,
   },
@@ -212,7 +221,16 @@ export const ModuleConfig = {
      * @param {object} state
      * @param {object} response
      */
-    onSuccess(state) {
+    onSuccess(state, data) {
+      //console.log('rrrrrrrr');console.log(data);
+      state.globalDatas = data.globalDatas ? data.globalDatas : {};
+      state.datas = data.datas ? data.datas : {};
+      state.infos = data.infos ? data.infos : {};
+      state.info = data.info ? data.info : {};
+      state.relateAttributes = data.relateAttributes ? data.relateAttributes : {};
+      state.baseFields = data.baseFields ? data.baseFields : {};
+      state.listSearchAttributes = data.listSearchAttributes ? data.listSearchAttributes : {};
+      //state. = data. ? data. : {};
       state.loading = false;
       state.errors = [];
     },
@@ -222,7 +240,17 @@ export const ModuleConfig = {
    * Vuex Defualt State
    */
   state: {
-    loading: false,
+    globalDatas: {},
+    datas: {},
+    relateAttributes: {},
+    listSearchAttributes: {},
+    baseFields: {},
+    pages: {},
+    infos: {},
+    info: {},
+    //: {},
+    rDatas: {},
+    loading: 'www',//false,
     errors: [],
   },
 };
