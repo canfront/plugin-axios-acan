@@ -1,7 +1,7 @@
 {
-  "name": "@vuex-orm/plugin-axios",
-  "version": "0.5.1",
-  "description": "Vuex-ORM Plugin to sync the data against a RESTful API.",
+  "name": "plugin-axios-acan",
+  "version": "0.0.1",
+  "description": "Based on @vuex-orm/plugin-axios, For myself useing, do some little differentiation. Thanks https://github.com/vuex-orm/plugin-axios",
   "main": "dist/index.js",
   "scripts": {
     "watch": "webpack --watch --mode=production",
@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "repository": {
-    "type": "git+https://github.com/vuex-orm/plugin-axios.git"
+    "type": "git+https://github.com/wangcan/plugin-axios-acan.git"
   },
   "keywords": [
     "vue",
