@@ -1,4 +1,5 @@
 import axios from 'axios';
+import qs from 'qs'
 
 export default class Axios {
   constructor(http) {
@@ -9,6 +10,16 @@ export default class Axios {
       config => http.onRequest(config, this.instance),
       error => http.onError(error, this.instance),
     );
+    this.instance.interceptors.request.use((config) => {
+      if (config.method === 'post') {
+        config.data = qs.parse(config.data);
+        //config.headers.Authorization = `${store.state.token}`;
+      }
+      //console.log('axios', config);
+      return config;
+    }, error => {
+      return Promise.reject(error)
+    });
 
     this.instance.interceptors.response.use(
       response => http.onResponse(response, this.instance),

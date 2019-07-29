@@ -40,7 +40,7 @@ export default class Get extends Action {
    * @param {object} model
    * @param {object} data
    */
-  static onSuccess(commit, model, data) {
+  static onSuccessold(commit, model, data) {
     commit('onSuccess')
     return model.insertOrUpdate({
       data,

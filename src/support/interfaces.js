@@ -188,6 +188,7 @@ export const ModuleConfig = {
     infos: state => state.infos,
     info: state => state.info,
     pages: state => state.pages,
+    formFields: state => state.formFields,
     //: state => state.,
     loading: state => state.loading,
     errors: state => state.errors,
@@ -227,6 +228,7 @@ export const ModuleConfig = {
       state.datas = data.datas ? data.datas : {};
       state.infos = data.infos ? data.infos : {};
       state.info = data.info ? data.info : {};
+      state.formFields = data.formFields ? data.formFields : {};
       state.relateAttributes = data.relateAttributes ? data.relateAttributes : {};
       state.baseFields = data.baseFields ? data.baseFields : {};
       state.listSearchAttributes = data.listSearchAttributes ? data.listSearchAttributes : {};
@@ -248,6 +250,7 @@ export const ModuleConfig = {
     pages: {},
     infos: {},
     info: {},
+    formFields: {},
     //: {},
     rDatas: {},
     loading: 'www',//false,

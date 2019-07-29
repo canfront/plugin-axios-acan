@@ -18,8 +18,9 @@ export default class Update extends Action {
     const model = context.getModelFromState(state);
     const endpoint = Action.transformParams('$update', model, params);
     const axios =  new Axios(model.methodConf.http);
-    const method = Action.getMethod('$update', model, 'put');
+    const method = Action.getMethod('$update', model, 'post');
     const request = axios[method](endpoint, params.data);
+    //console.log('update', params, request);
 
     await this.onRequest(model, params);
     try {

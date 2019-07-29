@@ -72,4 +72,36 @@ export default class Action {
     const customMethod = model.methodConf.methods[type].http.method;
     return (customMethod) ? customMethod : defaultMethod;
   }
+
+  /**
+   * On Successful Request Method
+   * @param {object} commit
+   * @param {object} model
+   * @param {object} data
+   */
+  static onSuccess(commit, model, data) {
+    if (data.status != 200) {
+      commit('onError', {data: data});
+      return ;
+    }
+    let globalDatas = data.globalDatas ? data.globalDatas : {};
+    let datas = data.datas;
+    //let formatDatas = model.formatData(data.datas);
+    let results = {
+      infos: datas.infos ? datas.infos : {},
+      info: datas.info ? datas.info : {},
+      baseFields: datas.baseFields ? datas.baseFields : {},
+      relateAttributes: datas.relateAttributes ? datas.relateAttributes : {},
+      pages: datas.pages ? datas.pages : {},
+      listSearchAttributes: datas.listSearchAttributes ? datas.listSearchAttributes : {},
+      formFields: datas.formFields ? datas.formFields : {},
+      datas: datas
+    }
+    commit('onSuccess', results)
+    model.returnDatas = results;
+    model.globalDatas = globalDatas;
+    return ;
+    //model.commit((state) => {state.returnDatas = data})
+    //return model.insertOrUpdate({data});
+  }
 }
