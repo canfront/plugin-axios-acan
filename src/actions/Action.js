@@ -58,7 +58,10 @@ export default class Action {
       const paramValue = has(config.params, param.replace(':', '')) ? config.params[param.replace(':', '')] : '';
       endpoint = endpoint.replace(param, paramValue).replace('//', '/');
     });
-    if (config.query) endpoint += `?${Object.keys(config.query).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(config.query[k])}`).join('&')}`;
+    if (config.query) {
+      let preMark = endpoint.includes('?') ? '&' : '?';
+      endpoint += preMark + `${Object.keys(config.query).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(config.query[k])}`).join('&')}`;
+    }
     return endpoint;
   }
 
