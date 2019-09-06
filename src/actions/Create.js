@@ -44,12 +44,12 @@ export default class Create extends Action {
    * @param {object} model
    * @param {object} data
    */
-  static onSuccess(commit, model, data) {
+  /*static onSuccess(commit, model, data) {
     commit('onSuccess')
     return model.insertOrUpdate({
       data,
     });
-  }
+  }*/
 
   /**
    * On Failed Request Method

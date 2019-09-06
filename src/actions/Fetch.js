@@ -15,12 +15,17 @@ export default class Fetch extends Action {
     const axios =  new Axios(model.methodConf.http);
     const method = Action.getMethod('$fetch', model, 'get');
     const request = axios[method](endpoint, params.data);
+    let tmpParams = params.params ? params.params : {};
+    let action = tmpParams.action ? tmpParams.action : '';
+    action += tmpParams.actionExt ? tmpParams.actionExt : '';
+    action = !action ? 'default' : action;
+    console.log('aaaa', action);
 
-    this.onRequest(commit);
+    this.onRequest(commit, action);
     try {
-      await this.onSuccess(commit, model, await request);
+      await this.onSuccess(commit, model, action, await request);
     } catch(error) {
-      this.onError(commit, error);
+      this.onError(commit, error, action);
     }
 
     return request;
@@ -30,16 +35,16 @@ export default class Fetch extends Action {
    * On Request Method
    * @param {object} commit
    */
-  static onRequest(commit) {
+  /*static onRequest(commit) {
     commit('onRequest');
-  }
+  }*/
 
   /**
    * On Failed Request Method
    * @param {object} commit
    * @param {object} error
    */
-  static onError(commit, error) {
+  /*static onError(commit, error) {
     commit('onError', error)
-  }
+  }*/
 }

@@ -181,15 +181,7 @@ export const ModuleConfig = {
    */
   getters: {
     datas: state => state.datas,
-    baseFields: state => state.baseFields,
-    listSearchAttributes: state => state.listSearchAttributes,
-    relateAttributes: state => state.relateAttributes,
     globalDatas: state => state.globalDatas,
-    infos: state => state.infos,
-    info: state => state.info,
-    pages: state => state.pages,
-    formFields: state => state.formFields,
-    //: state => state.,
     loading: state => state.loading,
     errors: state => state.errors,
   },
@@ -202,9 +194,9 @@ export const ModuleConfig = {
      * On Default Request
      * @param {object} state
      */
-    onRequest(state) {
-      state.loading = true;
-      state.errors = [];
+    onRequest(state, datas) {
+      state.loading = datas.loading;
+      state.errors = datas.errors;
     },
 
     /**
@@ -213,8 +205,11 @@ export const ModuleConfig = {
      * @param {object} response
      */
     onError(state, response) {
-      state.loading = false;
-      state.errors = response.data;
+      //state['loading'][stateIndex] = false;
+      //state['errors'][stateIndex] = response.data;
+      state.loading = response.loading;
+      state.errors = response.errors;
+      //state.errors = response.data;
     },
 
     /**
@@ -223,18 +218,12 @@ export const ModuleConfig = {
      * @param {object} response
      */
     onSuccess(state, data) {
-      //console.log('rrrrrrrr');console.log(data);
-      state.globalDatas = data.globalDatas ? data.globalDatas : {};
-      state.datas = data.datas ? data.datas : {};
-      state.infos = data.infos ? data.infos : {};
-      state.info = data.info ? data.info : {};
-      state.formFields = data.formFields ? data.formFields : {};
-      state.relateAttributes = data.relateAttributes ? data.relateAttributes : {};
-      state.baseFields = data.baseFields ? data.baseFields : {};
-      state.listSearchAttributes = data.listSearchAttributes ? data.listSearchAttributes : {};
-      //state. = data. ? data. : {};
-      state.loading = false;
-      state.errors = [];
+
+      state.datas = data.datas;
+      //state.datas[stateIndex] = datas;
+      state.globalDatas = data.globalData;
+      state.loading = data.loading;
+      state.errors = data.errors;
     },
   },
 
@@ -244,17 +233,8 @@ export const ModuleConfig = {
   state: {
     globalDatas: {},
     datas: {},
-    relateAttributes: {},
-    listSearchAttributes: {},
-    baseFields: {},
-    pages: {},
-    infos: {},
-    info: {},
-    formFields: {},
-    //: {},
-    rDatas: {},
-    loading: 'www',//false,
-    errors: [],
+    loading: {},//false,
+    errors: {},//[],
   },
 };
 
