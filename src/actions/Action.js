@@ -86,7 +86,7 @@ export default class Action {
     if (data.status != 200) {
       let eDatas = {
         loading: this.withIndexData(stateIndex, false),
-        errors: this.withIndexData(stateIndex, {data: data}),
+        errors: this.withIndexData(stateIndex, data),
 	  };
 
       commit('onError', eDatas);
@@ -97,7 +97,7 @@ export default class Action {
       datas: this.withIndexData(stateIndex, data.datas),
       globalDatas: this.withIndexData(stateIndex, data.globalDatas ? data.globalDatas : {}),
       loading: this.withIndexData(stateIndex, false),
-      errors: this.withIndexData(stateIndex, []),
+      errors: this.withIndexData(stateIndex, {status: 200, message: 'OK'}),
     };
     commit('onSuccess', datas);
     return ;
@@ -112,16 +112,29 @@ export default class Action {
   	return rData;
   }
 
-
   static onRequest(commit, stateIndex) {
     let datas = {
       loading: this.withIndexData(stateIndex, true),
-      errors: this.withIndexData(stateIndex, []),
+      errors: this.withIndexData(stateIndex, {}),
     };
     commit('onRequest', datas);
   }
 
   static onError(commit, error, stateIndex) {
-    commit('onError', error, stateIndex)
+    let eDatas = {
+      loading: this.withIndexData(stateIndex, false),
+      errors: this.withIndexData(stateIndex, {data: data}),
+    };
+    commit('onError', eDatas)
+  }
+
+  static getActionCode(params) {
+    let tmpParams = params.params ? params.params : {};
+    let action = tmpParams.action ? tmpParams.action : '';
+    action = action.replace('-', '');
+    action += tmpParams.actionExt ? tmpParams.actionExt : '';
+    action = !action ? 'default' : action;
+    console.log('aaaaaaa', action);
+    return action;
   }
 }

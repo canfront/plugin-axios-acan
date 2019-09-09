@@ -15,12 +15,8 @@ export default class Fetch extends Action {
     const axios =  new Axios(model.methodConf.http);
     const method = Action.getMethod('$fetch', model, 'get');
     const request = axios[method](endpoint, params.data);
-    let tmpParams = params.params ? params.params : {};
-    let action = tmpParams.action ? tmpParams.action : '';
-    action += tmpParams.actionExt ? tmpParams.actionExt : '';
-    action = !action ? 'default' : action;
-    console.log('aaaa', action);
 
+    let action = this.getActionCode(params);
     this.onRequest(commit, action);
     try {
       await this.onSuccess(commit, model, action, await request);

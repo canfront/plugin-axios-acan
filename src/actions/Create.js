@@ -20,11 +20,12 @@ export default class Create extends Action {
     const method = Action.getMethod('$create', model, 'post');
     const request = axios[method](endpoint, params.data);
 
-    this.onRequest(commit);
+    let action = this.getActionCode(params);
+    this.onRequest(commit, action);
     try {
-      await this.onSuccess(commit, model, await request);
+      await this.onSuccess(commit, model, action, await request);
     } catch(error) {
-      this.onError(commit, error);
+      this.onError(commit, error, action);
     }
 
     return request;
@@ -34,9 +35,9 @@ export default class Create extends Action {
    * On Request Method
    * @param {object} commit
    */
-  static onRequest(commit) {
+  /*static onRequest(commit) {
     commit('onRequest');
-  }
+  }*/
 
   /**
    * On Successful Request Method
@@ -56,7 +57,7 @@ export default class Create extends Action {
    * @param {object} commit
    * @param {object} error
    */
-  static onError(commit, error) {
+  /*static onError(commit, error) {
     commit('onError', error)
-  }
+  }*/
 }

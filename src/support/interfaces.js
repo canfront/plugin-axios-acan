@@ -205,8 +205,6 @@ export const ModuleConfig = {
      * @param {object} response
      */
     onError(state, response) {
-      //state['loading'][stateIndex] = false;
-      //state['errors'][stateIndex] = response.data;
       state.loading = response.loading;
       state.errors = response.errors;
       //state.errors = response.data;
@@ -218,7 +216,6 @@ export const ModuleConfig = {
      * @param {object} response
      */
     onSuccess(state, data) {
-
       state.datas = data.datas;
       //state.datas[stateIndex] = datas;
       state.globalDatas = data.globalData;
