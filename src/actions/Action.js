@@ -123,7 +123,7 @@ export default class Action {
   static onError(commit, error, stateIndex) {
     let eDatas = {
       loading: this.withIndexData(stateIndex, false),
-      errors: this.withIndexData(stateIndex, {data: data}),
+      errors: this.withIndexData(stateIndex, {data: error}),
     };
     commit('onError', eDatas)
   }
