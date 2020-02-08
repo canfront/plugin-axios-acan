@@ -22,7 +22,7 @@ export default class Action {
     const context = Context.getInstance();
     ModelConfig.http = merge({}, ModelConfig.http, context.options.http);
     model.methodConf = merge({}, ModelConfig, model.methodConf);
-    model.methodConf.http.url = (model.methodConf.http.url === '/') ? `/${model.entity}` : model.methodConf.http.url;
+    //model.methodConf.http.url = (model.methodConf.http.url === '/') ? `/${model.entity}` : model.methodConf.http.url;
 
     /**
      * Add Model Interface to each model
@@ -51,7 +51,12 @@ export default class Action {
    * @param {object} config
    */
   static transformParams(type, model, config = {}) {
-    let endpoint = `${model.methodConf.http.url}${model.methodConf.methods[type].http.url}`;
+  	let urlBase = model.methodConf.http.url;
+  	let envType = !config.params ? '' : (config.params.env_type ? config.params.env_type : '');
+  	if (envType == 'front') {
+  	  urlBase = model.methodConf.http.url_front;
+	}
+    let endpoint = `${urlBase}${model.methodConf.methods[type].http.url}`;
     const params = map(endpoint.match(/(\/?)(\:)([A-z]*)/gm), param => param.replace('/', ''));
 
     forEach(params, (param) => {
@@ -134,7 +139,7 @@ export default class Action {
     action = action.replace('-', '');
     action += tmpParams.actionExt ? tmpParams.actionExt : '';
     action = !action ? 'default' : action;
-    console.log('aaaaaaa', action);
+    //console.log('aaaaaaa', action);
     return action;
   }
 }
