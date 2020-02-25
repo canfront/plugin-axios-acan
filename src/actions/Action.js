@@ -52,10 +52,8 @@ export default class Action {
    */
   static transformParams(type, model, config = {}) {
   	let urlBase = model.methodConf.http.url;
-  	let envType = !config.params ? '' : (config.params.env_type ? config.params.env_type : '');
-  	if (envType == 'front') {
-  	  urlBase = model.methodConf.http.url_front;
-	}
+  	let envType = !config.params ? 'front' : (config.params.env_type ? config.params.env_type : 'front');
+  	urlBase = model.methodConf.http['url_' + envType];
     let endpoint = `${urlBase}${model.methodConf.methods[type].http.url}`;
     const params = map(endpoint.match(/(\/?)(\:)([A-z]*)/gm), param => param.replace('/', ''));
 
