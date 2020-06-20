@@ -86,7 +86,8 @@ export default class Action {
    * @param {object} data
    */
   static onSuccess(commit, model, stateIndex, data) {
-    if (data.status != 200) {
+  	  console.log('dddddd', data);
+    if (data.code != 200) {
       let eDatas = {
         loading: this.withIndexData(stateIndex, false),
         errors: this.withIndexData(stateIndex, data),
@@ -100,7 +101,7 @@ export default class Action {
       datas: this.withIndexData(stateIndex, data.datas),
       globalDatas: this.withIndexData(stateIndex, data.globalDatas ? data.globalDatas : {}),
       loading: this.withIndexData(stateIndex, false),
-      errors: this.withIndexData(stateIndex, {status: 200, message: 'OK'}),
+      errors: this.withIndexData(stateIndex, {code: 200, message: 'OK'}),
     };
     commit('onSuccess', datas);
     return ;
