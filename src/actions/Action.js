@@ -86,7 +86,6 @@ export default class Action {
    * @param {object} data
    */
   static onSuccess(commit, model, stateIndex, data) {
-  	  console.log('dddddd', data);
     if (data.code != 200) {
       let eDatas = {
         loading: this.withIndexData(stateIndex, false),
@@ -138,7 +137,6 @@ export default class Action {
     action = action.replace('-', '');
     action += tmpParams.actionExt ? tmpParams.actionExt : '';
     action = !action ? 'default' : action;
-    //console.log('aaaaaaa', action);
     return action;
   }
 }

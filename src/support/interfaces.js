@@ -65,7 +65,6 @@ export const AxiosRequestConfig = {
    * @param {number} status
    */
   validateStatus(status) {
-  	  console.log('ffffffff', status);
     return status >= 200 && status < 300; // default
   },
 
@@ -155,7 +154,6 @@ export const AxiosRequestConfig = {
       422: this.onValidationError,
       500: this.onServerError
     }
-    console.log('rrrrrrr', response);
     if (response && response.status in errorTypes) {
       errorTypes[response.status](error);
     } else {

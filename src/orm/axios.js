@@ -15,7 +15,6 @@ export default class Axios {
         config.data = qs.parse(config.data);
         //config.headers.Authorization = `${store.state.token}`;
       }
-      //console.log('axios', config);
       return config;
     }, error => {
       return Promise.reject(error)
