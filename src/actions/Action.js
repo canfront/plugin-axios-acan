@@ -51,9 +51,13 @@ export default class Action {
    * @param {object} config
    */
   static transformParams(type, model, config = {}) {
+      console.log(model, config, type, 'pppppp', model.methodConf);
   	let urlBase = model.methodConf.http.url;
-  	let envType = !config.params ? '' : (config.params.env_type ? '_' + config.params.env_type : '');
-  	urlBase = model.methodConf.http['url' + envType];
+  	let currentEnv = model.methodConf.currentEnv;
+  	urlBase = model.methodConf.http['url'];
+  	if (currentEnv) {
+  	  urlBase = '/' + currentEnv + urlBase;
+  	}
     let endpoint = `${urlBase}${model.methodConf.methods[type].http.url}`;
     const params = map(endpoint.match(/(\/?)(\:)([A-z]*)/gm), param => param.replace('/', ''));
 
@@ -61,6 +65,10 @@ export default class Action {
       const paramValue = has(config.params, param.replace(':', '')) ? config.params[param.replace(':', '')] : '';
       endpoint = endpoint.replace(param, paramValue).replace('//', '/');
     });
+    if (endpoint.endsWith('/')) {
+      endpoint = endpoint.substring(0, endpoint.length - 1);
+    }
+
     if (config.query) {
       let preMark = endpoint.includes('?') ? '&' : '?';
       endpoint += preMark + `${Object.keys(config.query).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(config.query[k])}`).join('&')}`;
