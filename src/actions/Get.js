@@ -18,9 +18,9 @@ export default class Get extends Action {
 
     this.onRequest(commit);
     try {
-      await this.onSuccess(commit, model, await request);
+      await this.onSuccess(commit, model, 'get', await request);
     } catch(error) {
-      this.onError(commit, error);
+      this.onError(commit, error, 'get');
     }
 
     return request;
@@ -30,9 +30,9 @@ export default class Get extends Action {
    * On Request Method
    * @param {object} commit
    */
-  static onRequest(commit) {
+  /*static onRequest(commit) {
     commit('onRequest');
-  }
+  }*/
 
   /**
    * On Successful Request Method
@@ -40,19 +40,19 @@ export default class Get extends Action {
    * @param {object} model
    * @param {object} data
    */
-  static onSuccessold(commit, model, data) {
+  /*static onSuccessold(commit, model, data) {
     commit('onSuccess')
     return model.insertOrUpdate({
       data,
     });
-  }
+  }*/
 
   /**
    * On Failed Request Method
    * @param {object} commit
    * @param {object} error
    */
-  static onError(commit, error) {
+  /*static onError(commit, error) {
     commit('onError', error)
-  }
+  }*/
 }
