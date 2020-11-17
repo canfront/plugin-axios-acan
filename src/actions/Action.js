@@ -51,7 +51,7 @@ export default class Action {
    * @param {object} config
    */
   static transformParams(type, model, config = {}) {
-      console.log(model, config, type, 'pppppp', model.methodConf);
+    //console.log(model, config, type, 'pppppp', model.methodConf);
   	let urlBase = model.methodConf.http.url;
   	let currentEnv = model.methodConf.currentEnv;
   	urlBase = model.methodConf.http['url'];
