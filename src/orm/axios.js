@@ -11,7 +11,7 @@ export default class Axios {
       error => http.onError(error, this.instance),
     );
     this.instance.interceptors.request.use((config) => {
-      if (config.method === 'post') {
+      if (config.method === 'post' || config.method == 'put' || config.method == 'delete') {
         config.data = qs.parse(config.data);
         //config.headers.Authorization = `${store.state.token}`;
       }

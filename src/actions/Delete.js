@@ -14,9 +14,14 @@ export default class Delete extends Action {
     const endpoint = Action.transformParams('$delete', model, params);
     const axios =  new Axios(model.methodConf.http);
     const method = Action.getMethod('$delete', model, 'delete');
-    const request = axios[method](endpoint);
 
-    await this.onRequest(model, params);
+    //const request = axios[method](endpoint);
+    //await this.onRequest(model, params);
+    const request = axios[method](endpoint, {data: params.data});
+      console.log(endpoint, request, method, 'eeeeeee', axios);
+
+    let action = this.getActionCode(params);
+    this.onRequest(commit, action);
     try {
       await this.onSuccess(model, params, await request);
     } catch(error) {
@@ -31,7 +36,7 @@ export default class Delete extends Action {
    * @param {object} model
    * @param {object} params
    */
-  static onRequest(model, params) {
+  /*static onRequest(model, params) {
     return model.update({
       where: params.params.id,
       data: {
@@ -39,7 +44,7 @@ export default class Delete extends Action {
         $deleteErrors: []
       }
     })
-  }
+  }*/
 
   /**
    * On Successful Request Method
