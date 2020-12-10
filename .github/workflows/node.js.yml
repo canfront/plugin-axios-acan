@@ -18,6 +18,7 @@ jobs:
       matrix:
         node-version: [12.x, 14.x]
     steps:
+      - run: npm install
       - uses: actions/setup-node@v1
         with:
           node-version: 12
