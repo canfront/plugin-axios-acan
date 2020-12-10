@@ -1,6 +1,6 @@
 {
   "name": "plugin-axios-acan",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Based on @vuex-orm/plugin-axios, For myself useing, do some little differentiation. Thanks https://github.com/vuex-orm/plugin-axios",
   "main": "dist/index.js",
   "scripts": {
